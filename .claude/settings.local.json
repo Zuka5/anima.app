@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install @clerk/nextjs @supabase/supabase-js @anthropic-ai/sdk)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''next:'', d[''dependencies''][''next'']\\); print\\(''react:'', d[''dependencies''][''react'']\\)\")"
+    ]
+  }
+}
