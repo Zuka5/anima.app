@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: "◈" },
+  { href: "/dashboard",          label: "Dashboard",          icon: "◈" },
   { href: "/active-imagination", label: "Active Imagination", icon: "🖼" },
-  { href: "/archetypes", label: "Archetypes", icon: "⚔️" },
-  { href: "/individuation", label: "Individuation", icon: "🌀" },
-  { href: "/sessions", label: "Sessions", icon: "💬" },
+  { href: "/archetypes",         label: "Archetypes",         icon: "⚔️" },
+  { href: "/individuation",      label: "Individuation",      icon: "🌀" },
+  { href: "/sessions",           label: "Sessions",           icon: "💬" },
 ];
 
 export default function Navigation() {
@@ -17,45 +17,81 @@ export default function Navigation() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-full w-56 flex flex-col z-50"
-      style={{ background: "#0d0d0d", borderRight: "1px solid #1e1e1e" }}
+      style={{
+        position: "fixed",
+        left: 0,
+        top: 0,
+        height: "100%",
+        width: "224px",
+        display: "flex",
+        flexDirection: "column",
+        zIndex: 50,
+        background: "var(--bg-surface)",
+        borderRight: "1px solid var(--border-subtle)",
+      }}
     >
       {/* Logo */}
-      <div className="px-5 py-5" style={{ borderBottom: "1px solid #1e1e1e" }}>
-        <Link href="/dashboard">
+      <div
+        style={{
+          padding: "18px 18px 16px",
+          borderBottom: "1px solid var(--border-subtle)",
+        }}
+      >
+        <Link href="/dashboard" style={{ textDecoration: "none" }}>
           <span
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "1.3rem",
-              color: "#e5e0d5",
-              letterSpacing: "0.05em",
+              fontSize: "1.2rem",
+              letterSpacing: "-0.01em",
+              color: "var(--text-primary)",
+              display: "block",
             }}
           >
             Anima
           </span>
+          <p
+            style={{
+              fontSize: "0.62rem",
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--text-muted)",
+              marginTop: "2px",
+            }}
+          >
+            Depth Psychology
+          </p>
         </Link>
-        <p style={{ color: "#3a3530", fontSize: "0.65rem", marginTop: "2px", letterSpacing: "0.1em" }}>
-          DEPTH PSYCHOLOGY
-        </p>
       </div>
 
       {/* Nav Links */}
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      <nav style={{ flex: 1, padding: "10px", overflowY: "auto" }}>
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-all"
               style={{
-                background: isActive ? "#1a1a1a" : "transparent",
-                color: isActive ? "#e5e0d5" : "#6b6560",
-                borderLeft: isActive ? "2px solid #b45309" : "2px solid transparent",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "8px 10px",
+                borderRadius: "8px",
+                marginBottom: "2px",
+                textDecoration: "none",
+                fontSize: "0.845rem",
+                fontWeight: 500,
+                background: isActive ? "var(--bg-elevated)" : "transparent",
+                color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+                borderLeft: isActive ? "2px solid var(--gold)" : "2px solid transparent",
+                transition: "all 0.1s ease",
               }}
             >
-              <span style={{ fontSize: "1rem" }}>{item.icon}</span>
-              <span>{item.label}</span>
+              <span style={{ fontSize: "0.95rem", lineHeight: 1, flexShrink: 0 }}>
+                {item.icon}
+              </span>
+              <span style={{ lineHeight: 1.3 }}>{item.label}</span>
             </Link>
           );
         })}
@@ -63,17 +99,20 @@ export default function Navigation() {
 
       {/* User */}
       <div
-        className="px-5 py-4 flex items-center gap-3"
-        style={{ borderTop: "1px solid #1e1e1e" }}
+        style={{
+          padding: "14px 18px",
+          borderTop: "1px solid var(--border-subtle)",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+        }}
       >
         <UserButton
           appearance={{
-            elements: {
-              avatarBox: "w-8 h-8",
-            },
+            elements: { avatarBox: "w-7 h-7" },
           }}
         />
-        <span style={{ color: "#4a4540", fontSize: "0.75rem" }}>Account</span>
+        <span style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>Account</span>
       </div>
     </aside>
   );

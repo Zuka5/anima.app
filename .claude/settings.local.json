@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(npm install @clerk/nextjs @supabase/supabase-js @anthropic-ai/sdk)",
-      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''next:'', d[''dependencies''][''next'']\\); print\\(''react:'', d[''dependencies''][''react'']\\)\")"
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''next:'', d[''dependencies''][''next'']\\); print\\(''react:'', d[''dependencies''][''react'']\\)\")",
+      "Bash(npm run build)",
+      "Bash(node -e \"const pkg = require\\(''/Users/zukakitiashvili/Documents/Anima.app/node_modules/@clerk/nextjs/package.json''\\); console.log\\(pkg.version\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/sign-in)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/dashboard)",
+      "Bash(kill %1)",
+      "Bash(ls /Users/zukakitiashvili/Documents/Anima.app/app/\\\\\\(dashboard\\\\\\)/)",
+      "Bash(ls \"/Users/zukakitiashvili/Documents/Anima.app/app/\\(dashboard\\)/\")"
     ]
   }
 }
