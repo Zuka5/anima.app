@@ -188,3 +188,4 @@ middleware.ts           # Clerk route protection
 - [ ] Mandala creation tool for Active Imagination
 - [ ] Art Institute of Chicago / Rijksmuseum APIs for infinite paintings
 - [ ] Export journal as PDF
+# anima.app
