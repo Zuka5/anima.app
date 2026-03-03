@@ -8,9 +8,23 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen" style={{ background: "#0a0a0a" }}>
+    <div style={{ background: "var(--bg-base)", minHeight: "100vh" }}>
       <Navigation />
-      <main className="flex-1 ml-56 min-h-screen">{children}</main>
+      {/* Desktop: offset by sidebar width. Mobile: offset by top nav height */}
+      <main className="dashboard-main">{children}</main>
+
+      <style>{`
+        .dashboard-main {
+          margin-left: 224px;
+          min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+          .dashboard-main {
+            margin-left: 0;
+            margin-top: 56px;
+          }
+        }
+      `}</style>
     </div>
   );
 }

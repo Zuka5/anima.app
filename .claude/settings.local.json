@@ -9,7 +9,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/dashboard)",
       "Bash(kill %1)",
       "Bash(ls /Users/zukakitiashvili/Documents/Anima.app/app/\\\\\\(dashboard\\\\\\)/)",
-      "Bash(ls \"/Users/zukakitiashvili/Documents/Anima.app/app/\\(dashboard\\)/\")"
+      "Bash(ls \"/Users/zukakitiashvili/Documents/Anima.app/app/\\(dashboard\\)/\")",
+      "Bash(npm install @netlify/plugin-nextjs)"
     ]
   }
 }

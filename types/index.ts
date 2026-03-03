@@ -1,4 +1,9 @@
-export type EntryType = "active_imagination" | "archetype" | "individuation";
+export type EntryType =
+  | "active_imagination"
+  | "archetype"
+  | "individuation"
+  | "word_association"
+  | "dream";
 
 export interface JournalEntry {
   id: string;
@@ -24,6 +29,26 @@ export interface Session {
   updated_at: string;
 }
 
+export interface WordAssociationEntry {
+  word: string;
+  response: string;
+  reactionTimeMs: number;
+}
+
+export interface ExtractedSymbol {
+  symbol: string;
+  category: "shadow" | "anima" | "animus" | "self" | "persona" | "other";
+  amplification?: string;
+}
+
+export interface DreamEntry {
+  narrative: string;
+  mood: string;
+  bigDream: boolean;
+  symbols: ExtractedSymbol[];
+  date: string;
+}
+
 export interface IndividuationProgress {
   id: string;
   user_id: string;
@@ -31,6 +56,23 @@ export interface IndividuationProgress {
   stage_notes: Record<string, string>;
   updated_at: string;
 }
+
+// Classic Jungian stimulus words from "Studies in Word Association" (1904-1909)
+export const JUNG_WORDS: string[] = [
+  "head",    "green",   "water",   "sing",    "dead",    "long",    "ship",    "pay",
+  "window",  "friendly","table",   "cold",    "dream",   "dance",   "village", "lake",
+  "sick",    "pride",   "fire",    "ink",     "angry",   "needle",  "journey", "blue",
+  "lamp",    "sin",     "bread",   "rich",    "tree",    "sharp",   "pity",    "yellow",
+  "mountain","dying",   "salt",    "new",     "habit",   "prayer",  "money",   "foolish",
+  "letter",  "despise", "finger",  "costly",  "bird",    "fall",    "book",    "unjust",
+  "frog",    "separate","hunger",  "white",   "child",   "care",    "pencil",  "sad",
+  "plum",    "marry",   "house",   "dear",    "glass",   "quarrel", "fur",     "large",
+  "strange", "paint",   "part",    "old",     "flower",  "beat",    "box",     "wild",
+  "family",  "wash",    "cow",     "stranger","luck",    "lie",     "duty",    "narrow",
+  "brother", "fear",    "false",   "anxiety", "kiss",    "bride",   "pure",    "door",
+  "choose",  "hay",     "content", "ridicule","sleep",   "month",   "gentle",  "woman",
+  "shadow",  "gold",    "abyss",   "self",
+];
 
 export const INDIVIDUATION_STAGES = [
   {
@@ -198,4 +240,131 @@ export const PAINTINGS = [
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/B%C3%B6cklin_-_B%C3%B6cklin_Arnold_Die_Toteninsel_III_%28Alte_Nationalgalerie%2C_Berlin%29.jpg/1280px-B%C3%B6cklin_-_B%C3%B6cklin_Arnold_Die_Toteninsel_III_%28Alte_Nationalgalerie%2C_Berlin%29.jpg",
     archetypalNote: "The threshold between worlds — the psyche in transit, approaching its own depths.",
   },
+  {
+    title: "The Nightmare",
+    artist: "Henry Fuseli",
+    year: 1781,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/The_Nightmare_Henry_Fuseli.jpg/1280px-The_Nightmare_Henry_Fuseli.jpg",
+    archetypalNote: "The incubus of the unconscious — the night terror that sits upon the sleeping ego, an image of the oppressive complex.",
+  },
+  {
+    title: "The Scream",
+    artist: "Edvard Munch",
+    year: 1893,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/800px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg",
+    archetypalNote: "The Shadow erupting — the existential dread that surges from the depths when the mask of the Persona dissolves.",
+  },
+  {
+    title: "Ophelia",
+    artist: "John Everett Millais",
+    year: 1852,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/John_Everett_Millais_-_Ophelia_-_Google_Art_Project.jpg/1280px-John_Everett_Millais_-_Ophelia_-_Google_Art_Project.jpg",
+    archetypalNote: "The submerged Anima — the feminine soul overcome by unconscious waters, surrendered entirely to the depths.",
+  },
+  {
+    title: "The Kiss",
+    artist: "Gustav Klimt",
+    year: 1908,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg/800px-The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg",
+    archetypalNote: "Coniunctio — the alchemical union of opposites, the sacred marriage of Anima and Animus dissolving into oneness.",
+  },
+  {
+    title: "Melancholia I",
+    artist: "Albrecht Dürer",
+    year: 1514,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Melencolia_I_%28Durero%29.jpg/800px-Melencolia_I_%28Durero%29.jpg",
+    archetypalNote: "The nigredo of the soul — the creative paralysis before transformation, the dark night that precedes illumination.",
+  },
+  {
+    title: "The Garden of Earthly Delights (detail)",
+    artist: "Hieronymus Bosch",
+    year: 1515,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/The_Garden_of_earthly_delights.jpg/1280px-The_Garden_of_earthly_delights.jpg",
+    archetypalNote: "The collective unconscious made visible — a psychic landscape where shadow contents move freely, uncensored by the waking ego.",
+  },
+  {
+    title: "Sphinx",
+    artist: "Franz von Stuck",
+    year: 1904,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Franz_von_Stuck_-_Die_Sphinx.jpg/800px-Franz_von_Stuck_-_Die_Sphinx.jpg",
+    archetypalNote: "The riddle of the unconscious — the Anima as fateful enigma, keeper of the question that only the Hero's self-knowledge can answer.",
+  },
+  {
+    title: "The Birth of Venus",
+    artist: "Sandro Botticelli",
+    year: 1486,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1280px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg",
+    archetypalNote: "The Anima rising from the collective unconscious — beauty, eros, and the soul emerging whole from the primordial waters.",
+  },
+  {
+    title: "The Lady of Shalott",
+    artist: "John William Waterhouse",
+    year: 1888,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/John_William_Waterhouse_-_The_Lady_of_Shalott_-_1888.jpg/800px-John_William_Waterhouse_-_The_Lady_of_Shalott_-_1888.jpg",
+    archetypalNote: "The soul imprisoned by its own mirror — the psyche that sees the world only as reflection, not yet able to face reality directly.",
+  },
+  {
+    title: "Hylas and the Nymphs",
+    artist: "John William Waterhouse",
+    year: 1896,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Waterhouse_Hylas_and_the_Nymphs_Manchester_Art_Gallery_1896.15.jpg/1280px-Waterhouse_Hylas_and_the_Nymphs_Manchester_Art_Gallery_1896.15.jpg",
+    archetypalNote: "The hero drawn into the depths by the Anima — the pull of the unconscious disguised as beauty, enchantment, and the lure of dissolution.",
+  },
+  {
+    title: "Proserpine",
+    artist: "Dante Gabriel Rossetti",
+    year: 1874,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Rossetti_Prosperine.jpg/800px-Rossetti_Prosperine.jpg",
+    archetypalNote: "The Anima in captivity — the soul caught between two worlds, belonging fully to neither the conscious light nor the underworld dark.",
+  },
+  {
+    title: "The Tower of Babel",
+    artist: "Pieter Bruegel the Elder",
+    year: 1563,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg/1280px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg",
+    archetypalNote: "Inflation of the ego — the collective hubris that drives the psyche to storm heaven, only to fracture into a thousand fragments.",
+  },
+  {
+    title: "Judith Slaying Holofernes",
+    artist: "Artemisia Gentileschi",
+    year: 1620,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Artemisia_Gentileschi_-_Judith_Slaying_Holofernes_-_WGA8563.jpg/800px-Artemisia_Gentileschi_-_Judith_Slaying_Holofernes_-_WGA8563.jpg",
+    archetypalNote: "The Shadow confronted and severed — the feminine principle acting with fierce clarity to liberate the psyche from its oppressor.",
+  },
+  {
+    title: "The Ambassadors",
+    artist: "Hans Holbein the Younger",
+    year: 1533,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Hans_Holbein_the_Younger_-_The_Ambassadors_-_Google_Art_Project.jpg/800px-Hans_Holbein_the_Younger_-_The_Ambassadors_-_Google_Art_Project.jpg",
+    archetypalNote: "Memento mori — the anamorphic skull hidden in plain sight, the death that underlies all worldly power, invisible until you change your angle of view.",
+  },
+  {
+    title: "Primavera",
+    artist: "Sandro Botticelli",
+    year: 1480,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Botticelli-primavera.jpg/1280px-Botticelli-primavera.jpg",
+    archetypalNote: "The garden of the collective unconscious — Mercury, Venus, the Graces, and Zephyr in a dance that maps the soul's archetypal forces in relation.",
+  },
+  {
+    title: "Wheatfield with Crows",
+    artist: "Vincent van Gogh",
+    year: 1890,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Vincent_van_Gogh_-_Wheat_Field_with_Crows_-_Google_Art_Project.jpg/1280px-Vincent_van_Gogh_-_Wheat_Field_with_Crows_-_Google_Art_Project.jpg",
+    archetypalNote: "The road that ends — the final confrontation between the ego's desire to go on and the Self's summons toward dissolution and wholeness.",
+  },
+  {
+    title: "The Three Ages of Woman",
+    artist: "Gustav Klimt",
+    year: 1905,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Gustav_Klimt_017.jpg/800px-Gustav_Klimt_017.jpg",
+    archetypalNote: "The Great Mother in her triple aspect — maiden, mother, and crone, the full arc of the Anima from innocence through fullness to wisdom.",
+  },
+  {
+    title: "Circe Offering the Cup to Ulysses",
+    artist: "John William Waterhouse",
+    year: 1891,
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Circe_Offering_the_Cup_to_Ulysses.jpg/800px-Circe_Offering_the_Cup_to_Ulysses.jpg",
+    archetypalNote: "The Anima as transformer — the enchantress who offers the cup of dissolution; to drink is to be changed, to refuse is to miss the initiation.",
+  },
 ];
+
